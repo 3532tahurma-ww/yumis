@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7c6d4">
+  <meta name="description" content="Yumis — rastgele kelimelerle fikir üret, not al.">
+  <title>Yumis</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand"><img src="icon.svg" alt="" width="36" height="36"><h1>Yumis</h1></div>
+    <nav class="tabs" id="tabs">
+      <button data-tab="gen" class="active"><span>✨</span>Fikir Üret</button>
+      <button data-tab="sets"><span>🧺</span>Kümeler</button>
+      <button data-tab="notes"><span>📒</span>Notlar</button>
+      <button data-tab="settings"><span>🎀</span>Ayarlar</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Fikir Üret -->
+    <section id="gen" class="panel active">
+      <div class="card">
+        <h2>Kümeler <small>(dokun: aç / kapat)</small></h2>
+        <div id="genSets"></div>
+      </div>
+
+      <div class="card">
+        <h2>Kaç kelime?</h2>
+        <div class="counts" id="counts"></div>
+        <label class="check"><input type="checkbox" id="shuffleAll"> Karışık sırala</label>
+      </div>
+
+      <button id="generateBtn" class="big-btn">🌸 Fikir Üret</button>
+
+      <div class="card result" id="resultCard">
+        <h2>Dizilim <small>(dokun: değiştir · ×: çıkar)</small></h2>
+        <div id="result" class="chips"></div>
+        <div class="add-row">
+          <select id="addSet" aria-label="Küme"></select>
+          <select id="addWord" aria-label="Kelime"></select>
+          <input id="addCustom" type="text" placeholder="ya da yeni kelime yaz (kümeye de eklenir)">
+          <button id="addBtn" class="btn small">＋ Ekle</button>
+          <button id="clearBtn" class="btn small ghost" title="Dizilimi temizle">🧹</button>
+        </div>
+        <textarea id="noteText" rows="4" placeholder="Aklına gelen fikri buraya yaz..."></textarea>
+        <button id="saveNoteBtn" class="btn">💾 Notu Kaydet</button>
+      </div>
+    </section>
+
+    <!-- Kümeler -->
+    <section id="sets" class="panel">
+      <div class="card">
+        <div class="seg" id="typeTabs"></div>
+        <div class="row">
+          <select id="setSelect" aria-label="Küme"></select>
+          <button id="addSetBtn" class="btn small" title="Yeni küme">＋</button>
+          <button id="renameSetBtn" class="btn small ghost" title="Yeniden adlandır">✎</button>
+          <button id="delSetBtn" class="btn small ghost" title="Kümeyi sil">🗑</button>
+        </div>
+      </div>
+      <div id="setWords"></div>
+    </section>
+
+    <!-- Notlar -->
+    <section id="notes" class="panel">
+      <div class="card">
+        <input id="noteSearch" type="search" placeholder="Notlarda ara...">
+      </div>
+      <div id="noteList" class="notes"></div>
+    </section>
+
+    <!-- Ayarlar -->
+    <section id="settings" class="panel">
+      <div class="card">
+        <h2>Dışa / İçe Aktar</h2>
+        <p class="muted">Tüm kümeler, kelimeler ve notlar JSON dosyası olarak.</p>
+        <div class="row wrap">
+          <button id="exportBtn" class="btn">⬇️ Dışa Aktar</button>
+          <label class="btn ghost file">⬆️ İçe Aktar<input id="importInput" type="file" accept=".json,application/json" hidden></label>
+        </div>
+        <label class="check"><input type="checkbox" id="importReplace"> İçe aktarırken mevcut verinin üzerine yaz (işaretsizse birleştirir)</label>
+      </div>
+      <div class="card">
+        <h2>Hazır Kümeler</h2>
+        <p class="muted">Eksik hazır kümeleri ve kelimeleri ekler; senin eklediklerine dokunmaz.</p>
+        <button id="defaultsBtn" class="btn ghost">🧺 Hazır Kümeleri Ekle</button>
+      </div>
+      <div class="card">
+        <h2>Sıfırla</h2>
+        <p class="muted">Her şeyi silip varsayılan kümelere döner.</p>
+        <button id="resetBtn" class="btn danger">Verileri Sıfırla</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status"></div>
+  <script src="sets.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
